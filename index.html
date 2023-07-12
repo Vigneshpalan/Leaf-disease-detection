@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Image Classification</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h3 {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        h2, p {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+
+        .image-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .image-label {
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 5px;
+            font-size: 12px;
+        }
+
+        .image-container img {
+            width: 300px; /* Change the width of the images */
+            margin-right: 10px;
+            float: left;
+        }
+
+        .image-container:last-child img {
+            margin-right: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Classification</h1>
+
+    <form action="/classify" method="POST" enctype="multipart/form-data">
+        <label for="file-input">Select an image:</label>
+        <input type="file" id="file-input" name="file" accept=".png, .jpg, .jpeg, .gif" required title="Select an image to classify">
+        <input type="submit" value="Classify" title="Submit the selected image for classification">
+    </form>
+
+    {% if result %}
+        <h2>Classification Result:</h2>
+        <p>Predicted class: {{ result }}</p>
+
+        <div class="image-container">
+            <img style = "float: right ;"src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Selected Image">
+            <span class="image-label"><h3 style="text-align: left;"></h3></span>
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='output/' + output_filename) }}" alt="Output Image">
+            <span class="image-label"></span>
+        </div>
+    {% endif %}
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
